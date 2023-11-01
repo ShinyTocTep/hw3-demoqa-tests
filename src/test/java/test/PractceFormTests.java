@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 
 public class PractceFormTests {
@@ -18,11 +17,14 @@ public class PractceFormTests {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
 //      Configuration.holdBrowserOpen = true;
-       }
+
+    }
 
     @Test
-    void FormTest() {
+    void formTest() {
         open("/automation-practice-form");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
         $("#firstName").setValue("Alex");
         $("#lastName").setValue("Egorov");
         $("#userEmail").setValue("alex@egorov.com");
