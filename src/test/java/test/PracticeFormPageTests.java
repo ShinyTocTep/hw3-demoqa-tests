@@ -1,5 +1,6 @@
 package test;
 
+import data.TestData;
 import org.junit.jupiter.api.Test;
 import pages.PracticeFormPage;
 import pages.components.ResultTableComponent;
@@ -9,50 +10,57 @@ public class PracticeFormPageTests extends TestBase {
 
     PracticeFormPage practiceFormPage = new PracticeFormPage();
     ResultTableComponent resultTableComponent = new ResultTableComponent();
+    TestData testData = new TestData();
     @Test
     void successfulFormTest() {
         practiceFormPage.openPage()
-                .setFirstName("Alex")
-                .setLastName("Egorov")
-                .setEmail("alex@egorov.com")
-                .setGender("Male")
-                .setUserNumber("8133701488")
-                .setDateOfBirth("1", "January", "1989")
-                .setSubjects("Maths")
-                .setHobbies("Sports")
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .setEmail(testData.userEmail)
+                .setGender(testData.gender)
+                .setUserNumber(testData.userNumber)
+                .setDateOfBirth(testData.day,
+                        testData.month,
+                        testData.year)
+                .setSubjects(testData.subjects)
+                .setHobbies(testData.hobbies)
                 .uploadPicture("1.png")
-                .setCurrentAddress("Elm street")
-                .setState("NCR")
-                .setCity("Delhi")
+                .setCurrentAddress(testData.streetAddress)
+                .setState(testData.state)
+                .setCity(testData.city)
                 .pressSubmit();
 
-        resultTableComponent.checkResult("Student Name", "Alex Egorov")
-                .checkResult("Student Email", "alex@egorov.com")
-                .checkResult("Gender", "Male")
-                .checkResult("Mobile", "8133701488")
-                .checkResult("Date of Birth", "1 January,1989")
-                .checkResult("Subjects", "Maths")
-                .checkResult("Hobbies", "Sports")
+        resultTableComponent.checkResult("Student Name", testData.firstName)
+                .checkResult("Student Email", testData.userEmail)
+                .checkResult("Gender", testData.gender)
+                .checkResult("Mobile", testData.userNumber)
+                .checkResult("Date of Birth", testData.day + "\n" +
+                        testData.month + "," +
+                        testData.year)
+                .checkResult("Subjects", testData.subjects)
+                .checkResult("Hobbies", testData.hobbies)
                 .checkResult("Picture", "1.png")
-                .checkResult("Address", "Elm street")
-                .checkResult("State and City", "NCR Delhi");
+                .checkResult("Address", testData.streetAddress)
+                .checkResult("State and City", testData.state + "\n" + testData.city);
     }
     @Test
     void reqFieldsFormTest() {
         practiceFormPage.openPage()
-                .setFirstName("Alex")
-                .setLastName("Egorov")
-                .setGender("Male")
-                .setUserNumber("8133701488")
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .setGender(testData.gender)
+                .setUserNumber(testData.userNumber)
                 .pressSubmit();
 
-        resultTableComponent.checkResult("Student Name", "Alex Egorov");
+        resultTableComponent.checkResult("Student Name", testData.firstName + "\n" + testData.lastName)
+                .checkResult("Gender", testData.gender)
+                .checkResult("Mobile", testData.userNumber);
     }
 
     @Test
     void negativeFormTest() {
         practiceFormPage.openPage()
-                .setFirstName("Alex")
+                .setFirstName(testData.firstName)
                 .pressSubmit();
 
         resultTableComponent.checkNegativeResult();
