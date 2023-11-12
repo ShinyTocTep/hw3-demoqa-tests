@@ -10,10 +10,11 @@ public class ResultTableComponent {
         $(".modal-dialog").should(appear);
         $(".table-responsive").$(byText(key)).parent()
                 .shouldHave(text(value));
-        
+
         return this;
     }
-public void  checkNegativeResult() {
+
+    public void checkNegativeResult() {
         $(".modal-dialog").shouldNot(appear);
     }
 }

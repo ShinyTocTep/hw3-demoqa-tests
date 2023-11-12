@@ -11,9 +11,11 @@ public class PracticeFormPageTests extends TestBase {
     PracticeFormPage practiceFormPage = new PracticeFormPage();
     ResultTableComponent resultTableComponent = new ResultTableComponent();
     TestData testData = new TestData();
+
     @Test
     void successfulFormTest() {
         practiceFormPage.openPage()
+                .removeWaste()
                 .setFirstName(testData.firstName)
                 .setLastName(testData.lastName)
                 .setEmail(testData.userEmail)
@@ -43,6 +45,7 @@ public class PracticeFormPageTests extends TestBase {
                 .checkResult("Address", testData.streetAddress)
                 .checkResult("State and City", testData.state + "\n" + testData.city);
     }
+
     @Test
     void reqFieldsFormTest() {
         practiceFormPage.openPage()
