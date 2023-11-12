@@ -49,6 +49,7 @@ public class PracticeFormPageTests extends TestBase {
     @Test
     void reqFieldsFormTest() {
         practiceFormPage.openPage()
+                .removeWaste()
                 .setFirstName(testData.firstName)
                 .setLastName(testData.lastName)
                 .setGender(testData.gender)
@@ -63,6 +64,7 @@ public class PracticeFormPageTests extends TestBase {
     @Test
     void negativeFormTest() {
         practiceFormPage.openPage()
+                .removeWaste()
                 .setFirstName(testData.firstName)
                 .pressSubmit();
 
